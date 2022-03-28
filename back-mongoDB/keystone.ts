@@ -1,6 +1,6 @@
-import { config, createSchema } from '@keystone-next/keystone/schema';
 import 'dotenv/config';
-
+import { createSchema } from '@keystone-next/keystone/schema';
+import { config } from '@keystone-next/keystone/schema';
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
 

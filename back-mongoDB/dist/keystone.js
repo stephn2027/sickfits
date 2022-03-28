@@ -1,13 +1,14 @@
 "use strict";
 exports.__esModule = true;
-var schema_1 = require("@keystone-next/keystone/schema");
 require("dotenv/config");
+var schema_1 = require("@keystone-next/keystone/schema");
+var schema_2 = require("@keystone-next/keystone/schema");
 var databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
 var sessionConfig = {
     maxAge: 60 * 60 * 24 * 360,
     secret: process.env.COOKIE_SECRET
 };
-exports["default"] = schema_1.config({
+exports["default"] = schema_2.config({
     server: {
         cors: {
             origin: [process.env.FRONTEND_URL],
