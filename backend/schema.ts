@@ -1,4 +1,4 @@
-import { createSchema } from '@keystone-next/keystone/schema';
+
 /*
 Welcome to the schema! The schema is the heart of Keystone.
 
@@ -49,9 +49,10 @@ export const lists: Lists = {
     fields: {
       name: text({ validation: { isRequired: true } }),
       email: text({
-        validation: { isRequired: true },
+        validation: { isRequired: true},
         isIndexed: 'unique',
         isFilterable: true,
+        
       }),
       // The password field takes care of hiding details and hashing values
       password: password({ validation: { isRequired: true } }),
@@ -60,11 +61,12 @@ export const lists: Lists = {
       // should be referencable by the 'author' field of posts.
       // Make sure you read the docs to understand how they work: https://keystonejs.com/docs/guides/relationships#understanding-relationships
       posts: relationship({ ref: 'Post.author', many: true }),
+      //TODO add roles, cart and orders
     },
     // Here we can configure the Admin UI. We want to show a user's name and posts in the Admin UI
     ui: {
       listView: {
-        initialColumns: ['name', 'posts'],
+        initialColumns: ['name', 'posts', 'email'],
       },
     },
   }),

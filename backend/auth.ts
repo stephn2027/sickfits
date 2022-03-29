@@ -38,6 +38,7 @@ const { withAuth } = createAuth({
     // If there are no items in the database, keystone will ask you to create
     // a new user, filling in these fields.
     fields: ['name', 'email', 'password'],
+    //TODO add in initial roles
   },
 });
 
@@ -46,7 +47,7 @@ const { withAuth } = createAuth({
 let sessionMaxAge = 60 * 60 * 24 * 30; // 30 days
 
 // This defines how sessions should work. For more details, check out: https://keystonejs.com/docs/apis/session#session-api
-const session = statelessSessions({
+const session =  statelessSessions({
   maxAge: sessionMaxAge,
   secret: sessionSecret!,
 });
