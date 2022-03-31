@@ -127,6 +127,96 @@ input PostRelateToManyForCreateInput {
   connect: [PostWhereUniqueInput!]
 }
 
+type Product {
+  id: ID!
+  name: String
+  description: String
+  status: String
+  price: Int
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
+input ProductWhereInput {
+  AND: [ProductWhereInput!]
+  OR: [ProductWhereInput!]
+  NOT: [ProductWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  description: StringFilter
+  status: StringNullableFilter
+  price: IntNullableFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
+input ProductOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  description: OrderDirection
+  status: OrderDirection
+  price: OrderDirection
+}
+
+input ProductUpdateInput {
+  name: String
+  description: String
+  status: String
+  price: Int
+}
+
+input ProductUpdateArgs {
+  where: ProductWhereUniqueInput!
+  data: ProductUpdateInput!
+}
+
+input ProductCreateInput {
+  name: String
+  description: String
+  status: String
+  price: Int
+}
+
 type Post {
   id: ID!
   title: String
@@ -164,35 +254,6 @@ input PostWhereInput {
   publishDate: DateTimeNullableFilter
   author: UserWhereInput
   tags: TagManyRelationFilter
-}
-
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  mode: QueryMode
-  not: NestedStringNullableFilter
-}
-
-input NestedStringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
 }
 
 input DateTimeNullableFilter {
@@ -325,6 +386,15 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
+  createProduct(data: ProductCreateInput!): Product
+  createProducts(data: [ProductCreateInput!]!): [Product]
+  updateProduct(
+    where: ProductWhereUniqueInput!
+    data: ProductUpdateInput!
+  ): Product
+  updateProducts(data: [ProductUpdateArgs!]!): [Product]
+  deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteProducts(where: [ProductWhereUniqueInput!]!): [Product]
   createPost(data: PostCreateInput!): Post
   createPosts(data: [PostCreateInput!]!): [Post]
   updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
@@ -375,6 +445,14 @@ type Query {
   ): [User!]
   user(where: UserWhereUniqueInput!): User
   usersCount(where: UserWhereInput! = {}): Int
+  products(
+    where: ProductWhereInput! = {}
+    orderBy: [ProductOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Product!]
+  product(where: ProductWhereUniqueInput!): Product
+  productsCount(where: ProductWhereInput! = {}): Int
   posts(
     where: PostWhereInput! = {}
     orderBy: [PostOrderByInput!]! = []

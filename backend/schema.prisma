@@ -19,6 +19,14 @@ model User {
   posts    Post[] @relation("Post_author")
 }
 
+model Product {
+  id          String  @id @default(cuid())
+  name        String  @default("")
+  description String  @default("")
+  status      String? @default("DRAFT")
+  price       Int?
+}
+
 model Post {
   id          String    @id @default(cuid())
   title       String    @default("")

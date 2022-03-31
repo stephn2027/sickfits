@@ -1,4 +1,3 @@
-
 /*
 Welcome to the schema! The schema is the heart of Keystone.
 
@@ -16,7 +15,7 @@ A field: The individual bits of data on your list, each with its own type.
 // Like the `config` function we use in keystone.ts, we use functions
 // for putting in our config so we get useful errors. With typescript,
 // we get these even before code runs.
-import { list} from '@keystone-6/core';
+import { list } from '@keystone-6/core';
 
 // We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
@@ -26,6 +25,7 @@ import {
   password,
   timestamp,
   select,
+  integer,
 } from '@keystone-6/core/fields';
 // The document field is a more complicated field, so it's in its own package
 // Keystone aims to have all the base field types, but you can make your own
@@ -49,10 +49,9 @@ export const lists: Lists = {
     fields: {
       name: text({ validation: { isRequired: true } }),
       email: text({
-        validation: { isRequired: true},
+        validation: { isRequired: true },
         isIndexed: 'unique',
         isFilterable: true,
-        
       }),
       // The password field takes care of hiding details and hashing values
       password: password({ validation: { isRequired: true } }),
@@ -68,6 +67,32 @@ export const lists: Lists = {
       listView: {
         initialColumns: ['name', 'posts', 'email'],
       },
+    },
+  }),
+  Product: list({
+    //TODO
+    //access
+    fields: {
+      name: text({ validation: { isRequired: true } }),
+      description: text({
+        ui: {
+          displayMode: 'textarea',
+        },
+      }),
+      status: select({
+        options: [
+          { label: 'draft', value: 'DRAFT' },
+          { label: 'available', value: 'AVAILABLE' },
+          { label: 'unavailable', value: 'UNAVAILABLE' },
+        ],
+        defaultValue: 'DRAFT',
+        ui: {
+          displayMode: 'segmented-control',
+          createView: { fieldMode: 'hidden' },
+        },
+      }),
+      price: integer(),
+      
     },
   }),
   // Our second list is the Posts list. We've got a few more fields here
