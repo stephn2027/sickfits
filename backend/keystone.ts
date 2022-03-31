@@ -22,7 +22,7 @@ export default withAuth(
     // the db sets the database provider - we're using sqlite for the fastest startup experience
     db: {
       provider: 'postgresql' || 'sqlite',
-      url: databaseURL || 'file:./keystone.db',
+      url: 'postgres://beqpswbi:ru2fCsMixSLOltvGx0WHaqciUr1ePMy7@arjuna.db.elephantsql.com/beqpswbi' || 'file:./keystone.db',
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui
     ui: {
@@ -36,7 +36,7 @@ export default withAuth(
     session,
     server: {
       cors: {
-        origin: frontendURL,
+        origin: "http://localhost:7777",
         credentials: true,
       },
     },
