@@ -16,8 +16,8 @@ A field: The individual bits of data on your list, each with its own type.
 // for putting in our config so we get useful errors. With typescript,
 // we get these even before code runs.
 import { list } from '@keystone-6/core';
-
-// We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
+import {Cloudinary} from '@keystone-6/cloudinary';
+// We're using some common fields in the starter. Check out ttps://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
 import {
   text,
@@ -94,6 +94,11 @@ export const lists: Lists = {
       price: integer(),
       
     },
+  }),
+  ProductImage:list({
+    fields:{
+      image: cloudinaryImage({})
+    }
   }),
   // Our second list is the Posts list. We've got a few more fields here
   // so we have all the info we need for displaying posts.
