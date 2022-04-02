@@ -7,7 +7,7 @@ You can find all the config options in our docs here: https://keystonejs.com/doc
 */
 
 import { config } from '@keystone-6/core';
-
+import 'dotenv/config';
 // Look in the schema file for how we define our lists, and how users interact with them through graphql or the Admin UI
 import { lists } from './schema';
 
@@ -22,7 +22,7 @@ export default withAuth(
     // the db sets the database provider - we're using sqlite for the fastest startup experience
     db: {
       provider: 'postgresql' || 'sqlite',
-      url: 'postgres://beqpswbi:ru2fCsMixSLOltvGx0WHaqciUr1ePMy7@arjuna.db.elephantsql.com/beqpswbi' || 'file:./keystone.db',
+      url: databaseURL || 'file:./keystone.db',
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui
     ui: {
@@ -36,7 +36,7 @@ export default withAuth(
     session,
     server: {
       cors: {
-        origin: "http://localhost:7777",
+        origin: frontendURL || "http://localhost:7777",
         credentials: true,
       },
     },

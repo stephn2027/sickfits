@@ -1,3 +1,4 @@
+import { cloudinaryImage } from '@keystone-6/cloudinary';
 
 /*
 Welcome to the schema! The schema is the heart of Keystone.
@@ -17,7 +18,16 @@ A field: The individual bits of data on your list, each with its own type.
 // for putting in our config so we get useful errors. With typescript,
 // we get these even before code runs.
 import { list } from '@keystone-6/core';
-import {cloudinaryImage} from '@keystone-6/cloudinary';
+import 'dotenv/config';
+
+export const cloudinary={
+  cloudName:process.env.CLOUDINARY_CLOUD_NAME,
+  apiKey:process.env.CLOUDINARY_KEY,
+  apiSecret:process.env.CLOUDINARY_SECRET,
+  folder:'sickfits'
+
+};
+
 // We're using some common fields in the starter. Check out ttps://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
 import {
@@ -27,6 +37,7 @@ import {
   timestamp,
   select,
   integer,
+  image,
 } from '@keystone-6/core/fields';
 // The document field is a more complicated field, so it's in its own package
 // Keystone aims to have all the base field types, but you can make your own
@@ -95,10 +106,16 @@ export const lists: Lists = {
       price: integer(),
       
     },
+    
+  
   }),
-  ProductImage:list({
+  ProductImage: list({
     fields:{
-      image: cloudinaryImage({})
+     image:cloudinaryImage({
+      cloudinary,
+      label: 'source',
+     }),
+     altText: text(),
     }
   }),
   // Our second list is the Posts list. We've got a few more fields here
