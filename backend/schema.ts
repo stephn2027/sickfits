@@ -1,3 +1,4 @@
+
 /*
 Welcome to the schema! The schema is the heart of Keystone.
 
@@ -16,7 +17,7 @@ A field: The individual bits of data on your list, each with its own type.
 // for putting in our config so we get useful errors. With typescript,
 // we get these even before code runs.
 import { list } from '@keystone-6/core';
-import {Cloudinary} from '@keystone-6/cloudinary';
+import {cloudinaryImage} from '@keystone-6/cloudinary';
 // We're using some common fields in the starter. Check out ttps://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
 import {
