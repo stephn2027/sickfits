@@ -20,12 +20,11 @@ A field: The individual bits of data on your list, each with its own type.
 import { list } from '@keystone-6/core';
 import 'dotenv/config';
 
-export const cloudinary={
-  cloudName:process.env.CLOUDINARY_CLOUD_NAME,
-  apiKey:process.env.CLOUDINARY_KEY,
-  apiSecret:process.env.CLOUDINARY_SECRET,
-  folder:'sickfits'
-
+export const cloudinary = {
+  cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+  apiKey: process.env.CLOUDINARY_KEY,
+  apiSecret: process.env.CLOUDINARY_SECRET,
+  folder: 'sickfits',
 };
 
 // We're using some common fields in the starter. Check out ttps://keystonejs.com/docs/apis/fields#fields-api
@@ -86,11 +85,23 @@ export const lists: Lists = {
     //access
     fields: {
       name: text({ validation: { isRequired: true } }),
+
       description: text({
         ui: {
           displayMode: 'textarea',
         },
       }),
+
+      photo: relationship({
+        ref: 'ProductImage.product',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['image', 'altText'],
+          inlineCreate: { fields: ['image', 'altText'] },
+          inlineEdit: { fields: ['image', 'altText'] },
+        },
+      }),
+
       status: select({
         options: [
           { label: 'draft', value: 'DRAFT' },
@@ -104,19 +115,20 @@ export const lists: Lists = {
         },
       }),
       price: integer(),
-      
     },
-    
-  
   }),
   ProductImage: list({
-    fields:{
-     image:cloudinaryImage({
-      cloudinary,
-      label: 'source',
-     }),
-     altText: text(),
-    }
+    fields: {
+      image: cloudinaryImage({
+        cloudinary,
+        label: 'source',
+      }),
+      altText: text(),
+      product: relationship({ ref: 'Product.photo' }),
+    },
+    // ui: {
+    //   listView: { initialColumns: ['image', 'altText', 'product'] },
+    // },
   }),
   // Our second list is the Posts list. We've got a few more fields here
   // so we have all the info we need for displaying posts.
