@@ -23,20 +23,20 @@ export default withAuth(
     db: {
       provider: 'postgresql' || 'sqlite',
       url: databaseURL || 'file:./keystone.db',
+      onConnect() {
+        console.log('connected sss');
+      },
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui
     ui: {
       // For our starter, we check that someone has session data before letting them see the Admin UI.
-      isAccessAllowed: (context) =>!!context.session?.data
-      
-        
-    
+      isAccessAllowed: (context) => !!context.session?.data,
     },
     lists,
     session,
     server: {
       cors: {
-        origin: frontendURL || "http://localhost:7777",
+        origin: frontendURL || 'http://localhost:7777',
         credentials: true,
       },
     },
