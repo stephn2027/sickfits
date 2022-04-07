@@ -40,13 +40,17 @@ exports.insertSeedData = void 0;
 var data_1 = require("./data");
 function insertSeedData(keystone) {
     return __awaiter(this, void 0, void 0, function () {
-        var postgresql, _i, products_1, product, _id;
+        var PrismaAdapter, postgresql, _i, products_1, product, _id;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    // Keystone API changed, so we need to check for both versions to get keystone
+                    PrismaAdapter = require('@keystone-6/core/schema/dist/keystone-6-core-schema.cjs').PrismaAdapter;
                     console.log("\uD83C\uDF31 Inserting Seed Data: " + data_1.products.length + " Products");
-                    postgresql = keystone.postgresql;
+                    postgresql = new keystone({
+                        adapter: new PrismaAdapter({
+                            URL: 'postgres://beqpswbi:ru2fCsMixSLOltvGx0WHaqciUr1ePMy7@arjuna.db.elephantsql.com/beqpswbi'
+                        })
+                    });
                     _i = 0, products_1 = data_1.products;
                     _a.label = 1;
                 case 1:

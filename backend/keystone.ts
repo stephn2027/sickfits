@@ -13,6 +13,7 @@ import { lists } from './schema';
 
 // Keystone auth is configured separately - check out the basic auth setup we are importing from our auth file.
 import { withAuth, session } from './auth';
+import { insertSeedData } from './seed-data';
 
 const databaseURL = process.env.DATABASE_URL;
 const frontendURL = process.env.FRONTEND_URL;
@@ -23,8 +24,9 @@ export default withAuth(
     db: {
       provider: 'postgresql' || 'sqlite',
       url: databaseURL || 'file:./keystone.db',
-      onConnect() {
+      async onConnect(keystone) {
         console.log('connected sss');
+        await insertSeedData(keystone);
       },
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui
