@@ -37,39 +37,39 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.insertSeedData = void 0;
-var seed_1 = require("./seed");
-function insertSeedData(keystone) {
+var data_1 = require("./data");
+function insertSeedData(ks) {
+    var _a;
     return __awaiter(this, void 0, void 0, function () {
-        var adapter, postgresql, _i, products_1, product, _id;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var keystone, adapter, mongoose, _i, products_1, product, _id;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    // Keystone API changed, so we need to check for both versions to get keystone
-                    keystone.PrismaClient;
-                    adapter = keystone.db.provider;
-                    console.log("\uD83C\uDF31 Inserting Seed Data: " + seed_1.products.length + " Products");
-                    postgresql = adapter.postgresql;
-                    _i = 0, products_1 = seed_1.products;
-                    _a.label = 1;
+                    keystone = ks.keystone || ks;
+                    adapter = ((_a = keystone.adapters) === null || _a === void 0 ? void 0 : _a.MongooseAdapter) || keystone.adapter;
+                    console.log("\uD83C\uDF31 Inserting Seed Data: " + data_1.products.length + " Products");
+                    mongoose = adapter.mongoose;
+                    _i = 0, products_1 = data_1.products;
+                    _b.label = 1;
                 case 1:
                     if (!(_i < products_1.length)) return [3 /*break*/, 5];
                     product = products_1[_i];
                     console.log("  \uD83D\uDECD\uFE0F Adding Product: " + product.name);
-                    return [4 /*yield*/, postgresql
+                    return [4 /*yield*/, mongoose
                             .model('ProductImage')
                             .create({ image: product.photo, altText: product.description })];
                 case 2:
-                    _id = (_a.sent())._id;
+                    _id = (_b.sent())._id;
                     product.photo = _id;
-                    return [4 /*yield*/, postgresql.model('Product').create(product)];
+                    return [4 /*yield*/, mongoose.model('Product').create(product)];
                 case 3:
-                    _a.sent();
-                    _a.label = 4;
+                    _b.sent();
+                    _b.label = 4;
                 case 4:
                     _i++;
                     return [3 /*break*/, 1];
                 case 5:
-                    console.log("\u2705 Seed Data Inserted: " + seed_1.products.length + " Products");
+                    console.log("\u2705 Seed Data Inserted: " + data_1.products.length + " Products");
                     console.log("\uD83D\uDC4B Please start the process with `yarn dev` or `npm run dev`");
                     process.exit();
                     return [2 /*return*/];
