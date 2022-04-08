@@ -1,14 +1,13 @@
-import { products } from './data';
 
+import { products } from './seed';
+import {PrismaClient} from '@prisma/client';
 export async function insertSeedData(keystone: any) {
   // Keystone API changed, so we need to check for both versions to get keystone
 
-  const {
-    PrismaAdapter
-  } = require('@keystone-6/core/schema/dist/keystone-6-core-schema.cjs');
+  const prisma = new PrismaClient();
   console.log(`🌱 Inserting Seed Data: ${products.length} Products`);
   const postgresql = new keystone({
-    adapter: new PrismaAdapter({
+    adapter: prismaC({
       URL: 'postgres://beqpswbi:ru2fCsMixSLOltvGx0WHaqciUr1ePMy7@arjuna.db.elephantsql.com/beqpswbi',
     }),
   });

@@ -37,21 +37,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.insertSeedData = void 0;
-var data_1 = require("./data");
+var seed_1 = require("./seed");
+var client_1 = require("@prisma/client");
 function insertSeedData(keystone) {
     return __awaiter(this, void 0, void 0, function () {
-        var PrismaAdapter, postgresql, _i, products_1, product, _id;
+        var prisma, postgresql, _i, products_1, product, _id;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    PrismaAdapter = require('@keystone-6/core/schema/dist/keystone-6-core-schema.cjs').PrismaAdapter;
-                    console.log("\uD83C\uDF31 Inserting Seed Data: " + data_1.products.length + " Products");
+                    prisma = new client_1.PrismaClient();
+                    console.log("\uD83C\uDF31 Inserting Seed Data: " + seed_1.products.length + " Products");
                     postgresql = new keystone({
-                        adapter: new PrismaAdapter({
+                        adapter: prismaC({
                             URL: 'postgres://beqpswbi:ru2fCsMixSLOltvGx0WHaqciUr1ePMy7@arjuna.db.elephantsql.com/beqpswbi'
                         })
                     });
-                    _i = 0, products_1 = data_1.products;
+                    _i = 0, products_1 = seed_1.products;
                     _a.label = 1;
                 case 1:
                     if (!(_i < products_1.length)) return [3 /*break*/, 5];
@@ -71,7 +72,7 @@ function insertSeedData(keystone) {
                     _i++;
                     return [3 /*break*/, 1];
                 case 5:
-                    console.log("\u2705 Seed Data Inserted: " + data_1.products.length + " Products");
+                    console.log("\u2705 Seed Data Inserted: " + seed_1.products.length + " Products");
                     console.log("\uD83D\uDC4B Please start the process with `yarn dev` or `npm run dev`");
                     process.exit();
                     return [2 /*return*/];
