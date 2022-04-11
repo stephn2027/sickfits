@@ -16,7 +16,7 @@ import { withAuth, session } from './auth';
 import { insertSeedData } from './seed-data';
 
 const databaseURL = process.env.DATABASE_URL;
-const frontendURL = process.env.FRONTEND_URL;
+const frontendURL = process.env.FRONTEND_URL!;
 export default withAuth(
   // Using the config function helps typescript guide you to the available options.
   config({
@@ -25,9 +25,9 @@ export default withAuth(
       
       provider: 'postgresql' || 'sqlite',
       url: databaseURL || 'file:./keystone.db',
-      async onConnect(keystone) {
+      async onConnect(context) {
         console.log('connected sss');
-        await insertSeedData(keystone);
+        await insertSeedData(context.prisma);
       },
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui
