@@ -93,6 +93,7 @@ function insertSeedData(prisma) {
                 case 5:
                     console.log("\u2705 Seed Data Inserted: " + seed_1.products.length + " Products");
                     console.log("\uD83D\uDC4B Please start the process with `yarn dev` or `npm run dev`");
+                    process.exit();
                     return [2 /*return*/];
             }
         });

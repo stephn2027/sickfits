@@ -26,8 +26,11 @@ export default withAuth(
       provider: 'postgresql' || 'sqlite',
       url: databaseURL || 'file:./keystone.db',
       async onConnect(context) {
-        console.log('connected sss');
-        await insertSeedData(context.prisma);
+        console.log('connected to the database!');
+        if(process.argv.includes('--seed-data')){
+
+          await insertSeedData(context.prisma);
+        }
       },
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui

@@ -23,5 +23,5 @@ export async function insertSeedData(prisma: PrismaClient) {
   console.log(
     `👋 Please start the process with \`yarn dev\` or \`npm run dev\``
   );
-  
+  process.exit();
 }
