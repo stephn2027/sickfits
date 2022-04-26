@@ -43,6 +43,8 @@ function createClient(_ref) {
       headers: headers
     })]),
     cache: new _client.InMemoryCache({
+      connectToDevTools: process.env.NODE_ENV === 'development',
+      queryDeduplication: true,
       typePolicies: {
         Query: {
           fields: {// TODO: We will add this together!

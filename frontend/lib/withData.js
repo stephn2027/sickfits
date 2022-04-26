@@ -4,7 +4,7 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
 import { endpoint, prodEndpoint } from '../config';
- 
+
 function createClient({ headers, initialState }) {
   return new ApolloClient({
     link: ApolloLink.from([
@@ -31,6 +31,8 @@ function createClient({ headers, initialState }) {
       }),
     ]),
     cache: new InMemoryCache({
+      connectToDevTools: process.env.NODE_ENV === 'development',
+      queryDeduplication: true,
       typePolicies: {
         Query: {
           fields: {
