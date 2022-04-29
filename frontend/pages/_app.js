@@ -14,12 +14,12 @@ Router.events.on('routeChangeComplete', () => Nprogress.done());
 Router.events.on('routeChangeError', () => Nprogress.done());
 
 function MyApp({ Component, pageProps, apollo }) {
+  console.log(apollo);
   return (
     <ApolloProvider client={apollo}>
-
-    <Page>
-      <Component {...pageProps} />
-    </Page>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
     </ApolloProvider>
   );
 }
@@ -27,5 +27,16 @@ function MyApp({ Component, pageProps, apollo }) {
 MyApp.propTypes = {
   pageProps: PropTypes.object,
   Component: PropTypes.func,
+};
+// tell next.js that it needs to fetch all of the queries that is in all of the children components//
+// MyApp.getInitialProps is a next method that is asynchronous //
+MyApp.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {};
+  if (Component.getInitialProps) {
+    // eslint-disable-next-line no-unused-vars
+    pageProps = await Component.getInitialProps(ctx);
+  }
+  pageProps.query = ctx.query;
+  return { pageProps };
 };
 export default withData(MyApp);
