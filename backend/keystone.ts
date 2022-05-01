@@ -1,10 +1,11 @@
-import { Product } from './schemas/Product';
 import { createSchema } from '@keystone-next/keystone/schema';
 import { statelessSessions, withItemData } from '@keystone-next/keystone/session';
 import { createAuth } from '@keystone-next/auth';
 import { config } from '@keystone-next/keystone/schema';
-import 'dotenv/config';
+import { ProductImage } from './schemas/ProductImage';
+import { Product } from './schemas/Product';
 import { User } from './schemas/User';
+import 'dotenv/config';
 
 
 const databaseURL =
@@ -41,6 +42,7 @@ export default withAuth(config({
     // schema here
     User,
     Product,
+    ProductImage,
   }),
   // todo change roles here
   ui: {
