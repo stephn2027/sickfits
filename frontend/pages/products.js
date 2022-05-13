@@ -1,7 +1,7 @@
 import React from 'react';
 import Products from '../components/Products';
 
-export default function products() {
+export default function OrderPage() {
   return (
     <div>
       <Products />
