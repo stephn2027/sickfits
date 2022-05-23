@@ -9,5 +9,5 @@ export default function formatMoney(amount = 0) {
   }
   const formatter = new Intl.NumberFormat('ja-JP', options);
 
-  return formatter.format(amount / 100);
+  return formatter.format(amount);
 }
