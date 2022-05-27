@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
     };
      html{
          --red:#ff0000;
+         --maroon:#c30c1d;
          --black:#393939;
          --grey:#393939;
          --gray: var(--grey);
