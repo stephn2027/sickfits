@@ -29,7 +29,7 @@ const ProductList = styled.div`
 
 export default function Products() {
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY);
-  console.log(data, error, loading);
+ 
   if (loading) return <CircularIndeterminate value={100} />;
   if (error) return <p>There is an error: {error.message}</p>;
   return (

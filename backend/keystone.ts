@@ -55,14 +55,20 @@ export default withAuth(
     // todo change roles here
     ui: {
       // show the UI only for people who pass this test
+      
       isAccessAllowed: ({ session }) => {
-        //console.log(session);
+        
         return !!session?.data;
       },
+      // isAccessAllowed:({session})=>{
+      //   console.log(session)
+      //   return true},
+      
     },
     session: withItemData(statelessSessions(sessionConfig), {
       // GraphQl query
       User: 'id',
     }),
+    
   })
 );
