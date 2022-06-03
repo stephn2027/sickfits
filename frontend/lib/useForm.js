@@ -1,7 +1,13 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 
 export default function useForm(initialState = {}) {
   const [inputs, setInputs] = useState(initialState);
+  const initialValues = Object.keys(initialState).join('');
+
+  useEffect(() => {
+    setInputs(initialState);
+  }, [initialValues]);
 
   const handleChange = (e) => {
     let { value, name, type } = e.target;
