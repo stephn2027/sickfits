@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import formatMoney from '../lib/formatMoney';
+import DeleteProduct from './DeleteProduct';
 import Item from './styles/ItemStyles';
 import Title from './styles/Title';
 import PriceTag from './styles/PriceTag';
-import formatMoney from '../lib/formatMoney';
 
 export default function Product({ product }) {
   return (
@@ -23,6 +24,7 @@ export default function Product({ product }) {
         <Link href={{ pathname: 'update', query: { id: product.id } }}>
           Edit 🖌
         </Link>
+        <DeleteProduct>Delete</DeleteProduct>
       </div>
     </Item>
   );
