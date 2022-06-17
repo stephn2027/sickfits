@@ -24,7 +24,7 @@ export default function Product({ product }) {
         <Link href={{ pathname: 'update', query: { id: product.id } }}>
           Edit 🖌
         </Link>
-        <DeleteProduct>Delete</DeleteProduct>
+        <DeleteProduct id={product.id}>Delete</DeleteProduct>
       </div>
     </Item>
   );
