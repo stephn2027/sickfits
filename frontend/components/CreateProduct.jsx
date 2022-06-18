@@ -47,69 +47,68 @@ export default function CreateProduct() {
   );
 
   return (
-    <div>
-      <Form
-        onSubmit={async (e) => {
-          e.preventDefault();
+    <Form
+      onSubmit={async (e) => {
+        e.preventDefault();
 
-          const res = await createProduct();
-
+        const res = await createProduct();
+        if (res) {
           clearForm();
           // Go to products page after submitting the form
           Router.push({
-            pathname: `/products/${res.data.createProduct.id}`,
+            pathname: `/product/${res.data.createProduct.id}`,
           });
-        }}
-      >
-        <DisplayError error={error} />
-        <fieldset disabled={loading} aria-busy={loading}>
-          <label htmlFor="image">
-            {' '}
-            Image
-            <input
-              required
-              type="file"
-              name="image"
-              id="image"
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="name">
-            {' '}
-            Name
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-              value={inputs.name}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="price">
-            Price
-            <input
-              type="number"
-              name="price"
-              id="price"
-              placeholder="Price"
-              value={inputs.price}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="description">
-            Description
-            <textarea
-              name="description"
-              id="description"
-              placeholder="About this item"
-              value={inputs.description}
-              onChange={handleChange}
-            />
-          </label>
-          <button type="submit">+ Add Product</button>
-        </fieldset>
-      </Form>
-    </div>
+        }
+      }}
+    >
+      <DisplayError error={error} />
+      <fieldset disabled={loading} aria-busy={loading}>
+        <label htmlFor="image">
+          {' '}
+          Image
+          <input
+            required
+            type="file"
+            name="image"
+            id="image"
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="name">
+          {' '}
+          Name
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            value={inputs.name}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="price">
+          Price
+          <input
+            type="number"
+            name="price"
+            id="price"
+            placeholder="Price"
+            value={inputs.price}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="description">
+          Description
+          <textarea
+            name="description"
+            id="description"
+            placeholder="About this item"
+            value={inputs.description}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">+ Add Product</button>
+      </fieldset>
+    </Form>
   );
 }
