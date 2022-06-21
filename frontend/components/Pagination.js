@@ -5,6 +5,7 @@ import Link from 'next/link';
 import DisplayError from './ErrorMessage';
 import CircularStatic from './helpers/LoadingProgress';
 import PaginationStyles from './styles/PaginationStyles';
+import { perPage } from '../config';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
@@ -18,15 +19,24 @@ export default function Pagination({ page }) {
   const { error, loading, data } = useQuery(PAGINATION_QUERY);
   if (loading) return <CircularStatic value={100} />;
   if (error) return <DisplayError error={error} />;
+  const { count } = data._allProductsMeta;
+  const pageCount = Math.ceil(count / perPage);
+
   return (
     <PaginationStyles>
       <Head>
         <title>Sick Fits - Page {page} of ____</title>
       </Head>
-      <Link href="/">← Prev</Link>
-      <p>Page __ of ___</p>
-      <p>{data._allProductsMeta.count} Total Items</p>
-      <Link href="/">Next →</Link>
+      <Link href={`/products/${page - 1}`}>
+        <a aria-disabled={page <= 1}> ← Prev</a>
+      </Link>
+      <p>
+        Page {page} of {'  '}
+      </p>
+      <p>{data._allProducts} Total Items</p>
+      <Link href={`/products/${page + 1}`}>
+        <a aria-disabled={page >= pageCount}>Next →</a>
+      </Link>
     </PaginationStyles>
   );
 }
