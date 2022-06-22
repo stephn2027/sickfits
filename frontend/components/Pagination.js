@@ -25,13 +25,13 @@ export default function Pagination({ page }) {
   return (
     <PaginationStyles>
       <Head>
-        <title>Sick Fits - Page {page} of ____</title>
+        <title>Sick Fits - Page {page} of ___</title>
       </Head>
       <Link href={`/products/${page - 1}`}>
         <a aria-disabled={page <= 1}> ← Prev</a>
       </Link>
       <p>
-        Page {page} of {'  '}
+        Page {page} of {pageCount}
       </p>
       <p>{data._allProducts} Total Items</p>
       <Link href={`/products/${page + 1}`}>
